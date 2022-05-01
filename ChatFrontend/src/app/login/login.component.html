@@ -3,10 +3,10 @@
 <form style="width: 80%;" novalidate>
     <div style="text-align: center; margin-top: 20px;">   
         <div class="item1">
-        <mat-form-field style="width:100%;">
-            <mat-label>Username</mat-label>
-            <input matInput required id="usernameInput" style="height: 40%;" name="c1"/>
-        </mat-form-field>
+            <mat-form-field style="width:100%;">
+                <mat-label>Username</mat-label>
+                <input matInput required id="usernameInput" style="height: 40%;" name="c1"/>
+            </mat-form-field>
         </div>
         <div class="item3">
             <mat-form-field style="width:100%;">
@@ -17,8 +17,8 @@
     </div>
 
     <div>
-      <button >Log in</button>
-      <button >Sign up</button>
+      <button (click)="login()">Log in</button>
+      <button (click)="register()">Register</button>
     </div>
 
 </form>
