@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="ChatWAR">
+            
+    
+    <wb-module deploy-name="chat-war">
+                        
+        
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+                        
+        
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="ChatWAR"/>
-        <property name="java-output-path" value="/ChatWAR/build/classes"/>
+                        
+        
+        <property name="java-output-path" value="/chat-war/build/classes"/>
+        <property name="context-root" value="chat-war"/>
+                    
+    
     </wb-module>
+        
+
 </project-modules>

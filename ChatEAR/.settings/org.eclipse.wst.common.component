@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="ChatEAR">
-        <wb-resource deploy-path="/" source-path="/" tag="defaultRootSource"/>
-        <dependent-module archiveName="ChatJAR.jar" deploy-path="/" handle="module:/resource/ChatJAR/ChatJAR">
+            
+    
+    <wb-module deploy-name="chat-ear">
+                        
+        
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+                
+        <dependent-module archiveName="chat-war.war" deploy-path="/" handle="module:/resource/chat-war/chat-war">
+                        
+            <dependent-object/>
+                        
+            <dependency-type>uses</dependency-type>
+                    
+        </dependent-module>
+        <dependent-module archiveName="chat-jar.jar" deploy-path="/" handle="module:/resource/chat-jar/chat-jar">
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="ChatJARClient.jar" deploy-path="/" handle="module:/resource/ChatJARClient/ChatJARClient">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
+                    
+    
     </wb-module>
+        
+
 </project-modules>

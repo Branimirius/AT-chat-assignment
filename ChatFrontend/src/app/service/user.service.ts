@@ -16,7 +16,7 @@ export class UserService {
       let headers = new HttpHeaders({
         'Content-Type': 'application/json' });
       let options = { headers: headers };
-      this.http.post('http://localhost:8180/ChatWAR/rest/users/login/' + localStorage.getItem('sessionId'), body, options).subscribe();
+      this.http.post('http://localhost:8180/chat-war/rest/users/login/' + localStorage.getItem('sessionId'), body, options).subscribe();
     }
   
     register(username: string, password: string) {
@@ -27,6 +27,6 @@ export class UserService {
         let headers = new HttpHeaders({
           'Content-Type': 'application/json' });
         let options = { headers: headers };
-      this.http.post('http://localhost:8180/ChatWAR/rest/users/register/' + localStorage.getItem('sessionId'), body, options).subscribe();
+      this.http.post('http://localhost:8180/chat-war/rest/users/register/' + localStorage.getItem('sessionId'), body, options).subscribe();
     }   
 }
