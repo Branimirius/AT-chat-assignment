@@ -1,0 +1,26 @@
+<div style="height: 100%; display: flex; justify-content: center;">
+
+    <mat-card class="mat-elevation-z8" style="margin-top: 10%; width: 40%; height: 60%; display: flex; justify-content: center; align-items: center; height: max-content; padding-top: 20px; opacity: 85%;">
+            <form #feedform="ngForm" style="width: 80%;" novalidate>
+    
+                <div class="item1">
+                  <mat-form-field style="width:100%;">
+                      <mat-label>Username</mat-label>
+                      <input matInput required id="usernameInput" style="height: 40%;" #name = "ngModel" name="c1" [(ngModel)] = "username"/>
+                  </mat-form-field>
+                </div>
+                <div class="item3">
+                    <mat-form-field style="width:100%;">
+                        <mat-label>Password</mat-label>
+                        <input matInput required id="passwordInput" style="height: 40%;" #name2 = "ngModel" name="c2" [(ngModel)] = "password" type="password"/>
+                    </mat-form-field>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                  <button id="loginButton" [disabled] ="name.invalid || name2.invalid" mat-raised-button color="primary" type="submit" style="padding: 12px 32px; margin-right: 20px;" (click)="login()">Log in</button>
+                  <button id="signupButton" [disabled] ="name.invalid || name2.invalid" mat-raised-button color="accent" type="submit" style="padding: 12px 32px; " (click)="signup()">Sign up</button>
+                </div>
+      
+            </form>
+    </mat-card>
+</div>
