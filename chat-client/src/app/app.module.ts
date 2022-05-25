@@ -23,6 +23,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     AuthenticationComponent,
     LoggedInComponent,
     UserListComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,

@@ -14,7 +14,7 @@ export class LoggedInComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // receiveMessage($event) {
-  //   this.selected = $event
-  // }
+  receiveMessage($event) {
+    this.selected = $event
+  }
 }

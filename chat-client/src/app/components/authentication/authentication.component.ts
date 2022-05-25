@@ -51,15 +51,15 @@ export class AuthenticationComponent implements OnInit {
       this.router.navigate(['chat']);
     }
     else {
-      this.openSnackBar(message);
+      alert(message);
     }
   }
 
   handleRegistration(message : string) {
-    this.openSnackBar(message);
+    alert(message);
   }
 
-  openSnackBar(message : string) {
-    this.snackBar.open(message, 'Okay', {duration : 5000});
-  }
+  // openSnackBar(message : string) {
+  //   this.snackBar.open(message, 'Okay', {duration : 5000});
+  // }
 }

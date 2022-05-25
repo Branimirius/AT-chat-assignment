@@ -1,4 +1,4 @@
-export class MessageDto {
+export class Message {
     constructor(
         public otherUsername : string,
         public incoming : boolean,

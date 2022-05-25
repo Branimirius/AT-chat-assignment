@@ -10,15 +10,15 @@ export class MessageService {
 
   private baseUrl : string = 'http://localhost:8180/chat-war/rest/messages/';
 
-  // send(receiver : string, subject : string, content : string) {
-  //   this.http.post(this.baseUrl + "user/" + localStorage.getItem('sessionId') + "/" + receiver + "/" + subject + "/" + content, null).subscribe();
-  // }
+  send(receiver : string, subject : string, content : string) {
+    this.http.post(this.baseUrl + "user/" + localStorage.getItem('sessionId') + "/" + receiver + "/" + subject + "/" + content, null).subscribe();
+  }
 
-  // sendToAll(subject : string, content : string) {
-  //   this.http.post(this.baseUrl + "all/" + localStorage.getItem('sessionId') + "/" + subject + "/" + content, null).subscribe();
-  // }
+  sendToAll(subject : string, content : string) {
+    this.http.post(this.baseUrl + "all/" + localStorage.getItem('sessionId') + "/" + subject + "/" + content, null).subscribe();
+  }
 
-  // getMessages() {
-  //   this.http.get(this.baseUrl + localStorage.getItem('sessionId')).subscribe();
-  // }
+  getMessages() {
+    this.http.get(this.baseUrl + localStorage.getItem('sessionId')).subscribe();
+  }
 }
