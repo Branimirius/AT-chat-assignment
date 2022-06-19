@@ -59,7 +59,5 @@ export class AuthenticationComponent implements OnInit {
     alert(message);
   }
 
-  // openSnackBar(message : string) {
-  //   this.snackBar.open(message, 'Okay', {duration : 5000});
-  // }
+  
 }

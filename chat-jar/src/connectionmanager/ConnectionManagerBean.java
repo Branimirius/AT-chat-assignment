@@ -190,7 +190,7 @@ public class ConnectionManagerBean implements ConnectionManager {
 	
 	@Schedule(hour = "*", minute="*", second="*/120")
 	private void heartbeat() {
-		System.out.println("Heartbeat protocol initiated");
+		//System.out.println("Heartbeat protocol initiated");
 		for(String node : connectedNodes) {
 			System.out.println("Pinging node with alias: " + node);
 			new Thread(new Runnable() {

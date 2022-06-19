@@ -24,6 +24,9 @@ import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ChatComponent } from './components/chat/chat.component';
+import { AgentCentreComponent } from './agent-centre/agent-centre.component';
+import { AgentListComponent } from './agent-list/agent-list.component';
+import { RunningAgentsComponent } from './running-agents/running-agents.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { ChatComponent } from './components/chat/chat.component';
     LoggedInComponent,
     UserListComponent,
     ChatComponent,
+    AgentCentreComponent,
+    AgentListComponent,
+    RunningAgentsComponent,
   ],
   imports: [
     BrowserModule,
