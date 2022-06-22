@@ -18,5 +18,7 @@
 	<classpathentry kind="lib" path="lib/jackson-databind-2.11.0.rc1.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-core-2.11.0.rc1.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-annotations-2.11.0.rc1.jar"/>
+	<classpathentry kind="lib" path="lib/infinispan-core-8.2.8.Final.jar"/>
+	<classpathentry kind="lib" path="lib/infinispan-commons-8.2.8.Final.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

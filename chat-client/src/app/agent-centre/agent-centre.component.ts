@@ -1,7 +1,10 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { AgentType } from '../dto/agent-type';
 import { Message } from '../dto/message';
+import { AgentService } from '../services/agent-service';
 import { MessageService } from '../services/message.service';
 import { WebsocketService } from '../services/websocket.service';
 
@@ -12,7 +15,11 @@ import { WebsocketService } from '../services/websocket.service';
 })
 export class AgentCentreComponent implements OnInit {
   public selectedAgent : string = null;
-  constructor(private messageService : MessageService, private wsService : WebsocketService) { }
+  public agentTypes: AgentType[];
+
+  constructor(private messageService : MessageService, private wsService : WebsocketService, private agentService: AgentService) { 
+    this.GetAgentTypes();
+  }
   liveData$ = this.wsService.messages$;
 
   @Input() selected : string = null;
@@ -27,10 +34,11 @@ export class AgentCentreComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dataSource = new MatTableDataSource<Message>(this.displayedMessages);
-
+  
 
 
   ngOnInit(): void {
+    this.GetAgentTypes();
   }
   receiveMessage($event) {
     this.selected = $event
@@ -106,4 +114,15 @@ export class AgentCentreComponent implements OnInit {
     this.subject = ""
     this.content = ""
   }
+
+  GetAgentTypes() {
+    this.agentService.GetAgentTypes().subscribe((data: any) => {
+      this.agentTypes.length = 0;
+      for(const d of (data as any)){
+        this.agentTypes.push(d);
+      }
+      
+    });
+  }
+    
 }

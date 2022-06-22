@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faceted-project>
   <runtime name="WildFly 11.0 Runtime"/>
+  <secondary-runtime name="WildFly 11.0 Runtime 1"/>
+  <secondary-runtime name="WildFly 11.0 Runtime 2"/>
+  <secondary-runtime name="WildFly 11.0 Runtime 3"/>
   <fixed facet="java"/>
   <fixed facet="jst.web"/>
   <fixed facet="wst.jsdt.web"/>

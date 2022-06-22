@@ -10,8 +10,10 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateful;
 
+import agentmanager.AID;
 import chatmanager.ChatManagerRemote;
 import connectionmanager.ConnectionManagerBean;
+import messagemanager.ACLMessage;
 import messagemanager.AgentMessage;
 import messagemanager.AgentMessageType;
 import model.User;
@@ -161,5 +163,29 @@ public class UserAgent implements Agent {
 		List<User> loggedInUsers = chatManager.getLoggedIn();
 		for(User user : loggedInUsers)
 			sendMessage(user.getUsername(), subject, content);
+	}
+
+	@Override
+	public void handleACLMessage(ACLMessage message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public AID getAid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void initAID(AID aid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stop() {
+		// TODO Auto-generated method stub
+		
 	}
 }

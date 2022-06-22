@@ -7,8 +7,8 @@ import { RouteGuardService } from './guard/route-guard.service';
 
 const routes: Routes = [
   {path:'chat', component: LoggedInComponent, canActivate: [RouteGuardService], data: { onlyLoggedIn: true }},
-  {path:'', component: AgentCentreComponent, canActivate: [RouteGuardService], data: { onlyLoggedIn: false }},
-  {path:'login', component: AuthenticationComponent, canActivate: [RouteGuardService], data: { onlyLoggedIn: false }}
+  {path:'agents', component: AgentCentreComponent, canActivate: [RouteGuardService], data: { onlyLoggedIn: false }},
+  {path:'', component: AuthenticationComponent, canActivate: [RouteGuardService], data: { onlyLoggedIn: false }}
 
 ];
 
