@@ -18,7 +18,6 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button'
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
-import { PredictionComponent } from './components/prediction/prediction.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +27,8 @@ import { PredictionComponent } from './components/prediction/prediction.componen
     AgentTypesComponent,
     RunningAgentsComponent,
     SendMessageComponent,
-    HomeComponent,
-    PredictionComponent
+    HomeComponent
+    
   ],
   imports: [
     BrowserModule,
