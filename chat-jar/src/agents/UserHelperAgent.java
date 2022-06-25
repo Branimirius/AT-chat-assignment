@@ -30,29 +30,30 @@ public class UserHelperAgent extends BaseAgent {
 	public void handleMessage(ACLMessage message) {
 		switch(message.getPerformative()) {
 			case ADD_MESSAGE: {
-				addMessage(message);
-				report(message.getSender());
-				break;
+				//addMessage(message);
+				//report(message.getSender());
+				//break;
 			}
 			case ADD_REGISTERED: {
-				addRegistered(message);
-				report(message.getSender());
-				break;
+				//addRegistered(message);
+				//report(message.getSender());
+				//break;
 			}
 			case ADD_LOGGED_IN: {
-				addLoggedIn(message);
-				report(message.getSender());
-				break;
+				//addLoggedIn(message);
+				//report(message.getSender());
+				//break;
 			}
 			case REMOVE_LOGGED_IN: {
-				removeLoggedIn(message);
-				report(message.getSender());
-				break;
+				//removeLoggedIn(message);
+				//report(message.getSender());
+				//break;
 			}
 			default: return;
 		}
 	}
 	
+	/*
 	private void addMessage(ACLMessage message) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
@@ -61,6 +62,17 @@ public class UserHelperAgent extends BaseAgent {
 				chm.addMessage(msg);;
 		} catch (JsonProcessingException e) { }
 	}
+	
+	
+	private void addLoggedIn(ACLMessage message) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			User user = mapper.readValue(message.getContent(), User.class);
+			if(user != null)
+				chm.addLoggedIn(user);
+		} catch (JsonProcessingException e) { }
+	}
+	
 	
 	private void addRegistered(ACLMessage message) {
 		ObjectMapper mapper = new ObjectMapper();
@@ -71,14 +83,6 @@ public class UserHelperAgent extends BaseAgent {
 		} catch (JsonProcessingException e) { }
 	}
 	
-	private void addLoggedIn(ACLMessage message) {
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			User user = mapper.readValue(message.getContent(), User.class);
-			if(user != null)
-				chm.addLoggedIn(user);
-		} catch (JsonProcessingException e) { }
-	}
 	
 	private void removeLoggedIn(ACLMessage message) {
 		ObjectMapper mapper = new ObjectMapper();
@@ -99,5 +103,6 @@ public class UserHelperAgent extends BaseAgent {
 		message.setContentObj(new User("zoka", "zoka"));
 		msm.post(message);
 	}
+	*/
 
 }

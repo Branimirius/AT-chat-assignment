@@ -26,28 +26,36 @@ public class CollectorAgent extends BaseAgent {
 
 	@EJB MessageManagerRemote msm;
 	
-	@Override
-	public void handleMessage(ACLMessage message) {
-		switch(message.getPerformative()) {
-			case COLLECT: {
-				String team1 = message.getUserArg("team1").toString();
-				String team2 = message.getUserArg("team2").toString();
-				List<Match> matches = getMatches(team1, team2);
-				AID receiver = message.getReplyTo();
-				reply(receiver, message.getSender(), matches);
-				break;
-			}
-			default: return;
-		}
-	}
-
+	
+/*
 	private List<Match> getMatches(String team1, String team2) {
+		
 		return JSONFileReader.getMatchOutcomes().stream()
 				.filter(m -> (m.getTeam1().equals(team1) || m.getTeam1().equals(team2))
 						  && (m.getTeam2().equals(team1) || m.getTeam2().equals(team2)))
 			.collect(Collectors.toList());
 	}
+*/
 	
+	
+	@Override
+	public void handleMessage(ACLMessage message) {
+		switch(message.getPerformative()) {
+			case COLLECT: {
+				/*
+				String team1 = message.getUserArg("team1").toString();
+				String team2 = message.getUserArg("team2").toString();
+				List<Match> matches = getMatches(team1, team2);
+				AID receiver = message.getReplyTo();
+				reply(receiver, message.getSender(), matches);
+				*/
+				break;
+			}
+			default: return;
+		}
+	}
+	
+	/*
 	private void reply(AID receiver, AID replyTo, List<Match> matches) {
 		ACLMessage message = new ACLMessage();
 		message.setSender(aid);
@@ -64,5 +72,7 @@ public class CollectorAgent extends BaseAgent {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
+		
 	}
+	*/
 }

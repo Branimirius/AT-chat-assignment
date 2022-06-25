@@ -9,7 +9,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.ws.rs.Path;
 
-import agentmanager.AgentManagerRemote;
+import agentmanager.AgentManager;
 import agents.AID;
 import agents.AgentType;
 import agents.CollectorAgent;
@@ -27,7 +27,7 @@ import util.JNDILookup;
 @Remote(MatchEndpoint.class)
 public class MatchEndpointBean implements MatchEndpoint {
 
-	@EJB AgentManagerRemote agm;
+	@EJB AgentManager agm;
 	@EJB AgentCenterRemote acm;
 	@EJB MessageManagerRemote msm;
 	

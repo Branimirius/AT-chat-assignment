@@ -19,8 +19,10 @@ public class MasterAgent extends BaseAgent {
 	public void handleMessage(ACLMessage message) {
 		switch(message.getPerformative()) {
 			case DISPLAY: {
+				/*
 				System.out.println(message.getContent());
 				socket.send(message.getContent());
+				*/
 				break;
 			}
 			default: return;

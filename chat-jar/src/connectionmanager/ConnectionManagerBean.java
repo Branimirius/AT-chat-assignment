@@ -18,7 +18,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
-import agentmanager.AgentManagerRemote;
+import agentmanager.AgentManager;
 import agents.AID;
 import agents.AgentType;
 import rest.AgentEndpoint;
@@ -31,7 +31,7 @@ import util.AgentCenterRemote;
 public class ConnectionManagerBean implements ConnectionManager {
 	
 	@EJB AgentCenterRemote acm;
-	@EJB AgentManagerRemote agm;
+	@EJB AgentManager agm;
 	
 	private String hostAlias;
 	

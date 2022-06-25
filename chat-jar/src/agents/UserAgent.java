@@ -8,7 +8,7 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateful;
 
-import agentmanager.AgentManagerRemote;
+import agentmanager.AgentManager;
 import chatmanager.ChatManagerRemote;
 import connectionmanager.AgentCenter;
 import messagemanager.ACLMessage;
@@ -26,7 +26,7 @@ public class UserAgent extends BaseAgent {
 	private static final long serialVersionUID = 1L;
 	
 	@EJB ChatManagerRemote chm;
-	@EJB AgentManagerRemote agm;
+	@EJB AgentManager agm;
 	@EJB AgentCenterRemote acm;
 	@EJB MessageManagerRemote msm;
 	@EJB Logger logger;
@@ -43,7 +43,7 @@ public class UserAgent extends BaseAgent {
 		case REGISTER: {
 			String username = message.getUserArg("username").toString();
 			String password = message.getUserArg("password").toString();
-			register(username, password);
+			registerUser(username, password);
 			break;
 		}
 		case LOG_OUT: {
@@ -90,17 +90,9 @@ public class UserAgent extends BaseAgent {
 		}
 	}
 	
-	private void logIn(String username, String password) {
-		boolean success = chm.logIn(username, password);
-		if(success) {
-			logger.send("User with username " + username + " successfully logged in");
-			informHelperAgents(Performative.ADD_LOGGED_IN, new User(username, password));
-		}
-		else
-			logger.send("User with username " + username + " doesn't exist or the password is incorrect");
-	}
 	
-	private void register(String username, String password) {
+	
+	private void registerUser(String username, String password) {
 		boolean success = chm.register(username, password);
 		if(success) {
 			logger.send("User with username " + username + " successfully registered");
@@ -118,6 +110,16 @@ public class UserAgent extends BaseAgent {
 		}
 	}
 	
+	
+	private void logIn(String username, String password) {
+		boolean success = chm.logIn(username, password);
+		if(success) {
+			logger.send("User with username " + username + " successfully logged in");
+			informHelperAgents(Performative.ADD_LOGGED_IN, new User(username, password));
+		}
+		else
+			logger.send("User with username " + username + " doesn't exist or the password is incorrect");
+	}
 	private void getLoggedIn(String username) {
 		if(loggedIn(username)) {
 			List<User> users = chm.getLoggedIn();
@@ -125,12 +127,7 @@ public class UserAgent extends BaseAgent {
 		}
 	}
 	
-	private void getRegistered(String username) {
-		if(loggedIn(username)) {
-			List<User> users = chm.getRegistered();
-			logger.send("Registered users: " + users);
-		}
-	}
+	
 	
 	private void sendMessage(String sender, String receiver, String subject, String content) {
 		if(loggedIn(sender)) {
@@ -144,18 +141,21 @@ public class UserAgent extends BaseAgent {
 		}
 	}
 	
+	
+	private void getRegistered(String username) {
+		if(loggedIn(username)) {
+			List<User> users = chm.getRegistered();
+			logger.send("Registered users: " + users);
+		}
+	}
+	
 	private void sendMessageToAll(String sender, String subject, String content) {
 		if(loggedIn(sender))
 			for(User user : chm.getLoggedIn())
 				sendMessage(sender, user.getUsername(), subject, content);
 	}
 	
-	private void getAllMessages(String username) {
-		if(loggedIn(username)) {
-			List<Message> messages = chm.getMessages(username);
-			logger.send("Messages for user with username " + username + ": " + messages);
-		}
-	}
+	
 	
 	private boolean loggedIn(String username) {
 		if(!chm.existsLoggedIn(username)) {
@@ -188,9 +188,16 @@ public class UserAgent extends BaseAgent {
 		return agents;
 	}
 	
+	
+	private void getAllMessages(String username) {
+		if(loggedIn(username)) {
+			List<Message> messages = chm.getMessages(username);
+			logger.send("Messages for user with username " + username + ": " + messages);
+		}
+	}
 	private AgentType getAgentType(String node, String name) {
 		return agm.getAgentTypes().stream()
 				.filter(t -> t.getName().equals(UserHelperAgent.class.getSimpleName())
-						&& t.getHost().equals(node)).findFirst().orElse(null);
+						&& t.getNode().equals(node)).findFirst().orElse(null);
 	}
 }

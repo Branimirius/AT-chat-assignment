@@ -15,7 +15,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
-import agentmanager.AgentManagerRemote;
+import agentmanager.AgentManager;
 import agents.AID;
 import agents.Agent;
 import rest.MessageEndpoint;
@@ -28,7 +28,7 @@ import websocket.Logger;
 public class MDBConsumer implements MessageListener {
 
 	@EJB private AgentCenterRemote acm;
-	@EJB private AgentManagerRemote agentManager;
+	@EJB private AgentManager agentManager;
 	@EJB private Logger logger;
 	
 	@Override
@@ -39,8 +39,8 @@ public class MDBConsumer implements MessageListener {
 				Set<AID> receivers = new HashSet<AID>();
 				receivers.add(aid);
 				agentMessage.setReceivers(receivers);
-				if(!aid.getHost().getAlias().equals(acm.getHost().getAlias())) {
-					forwardMessage(agentMessage, aid.getHost().getAlias());
+				if(!aid.getNode().getAlias().equals(acm.getHost().getAlias())) {
+					forwardMessage(agentMessage, aid.getNode().getAlias());
 				}
 				else {
 					Agent agent = agentManager.getRunningAgentByAID(aid);

@@ -7,7 +7,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.ws.rs.Path;
 
-import agentmanager.AgentManagerRemote;
+import agentmanager.AgentManager;
 import agents.AID;
 import agents.AgentType;
 
@@ -16,7 +16,7 @@ import agents.AgentType;
 @Remote(AgentEndpoint.class)
 public class AgentEndpointBean implements AgentEndpoint {
 
-	@EJB AgentManagerRemote agm;
+	@EJB AgentManager agm;
 	
 	@Override
 	public Set<AgentType> getAllAgentTypes() {

@@ -38,7 +38,8 @@ public class PredictorAgent extends BaseAgent {
 	public void handleMessage(ACLMessage message) {
 		switch(message.getPerformative()) {
 			case PREDICT: {
-				collectedMatches.put(message.getSender().getHost().getAlias(), getMatches(message.getContent()));
+				/*
+				collectedMatches.put(message.getSender().getNode().getAlias(), getMatches(message.getContent()));
 				if(collected()) {
 					List<Match> matches = new ArrayList<Match>();
 					for(List<Match> m : collectedMatches.values())
@@ -51,12 +52,14 @@ public class PredictorAgent extends BaseAgent {
 						reply(message.getReplyTo(), "Not enough data to predict the outcome");
 					collectedMatches = new HashMap<String, List<Match>>();
 				}
+				*/
 				break;
 			}
 			default: return;
 		}
 	}
 	
+	/*
 	private String predict(List<Match> matches) {
 		List<Integer> x = new ArrayList<Integer>();
 		List<Integer> y = new ArrayList<Integer>();
@@ -106,4 +109,5 @@ public class PredictorAgent extends BaseAgent {
 		message.setContent(content);
 		msm.post(message);
 	}
+	*/
 }

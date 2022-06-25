@@ -6,13 +6,17 @@ public abstract class BaseAgent implements Agent {
 
 	protected AID aid;
 	
-	@Override
-	public void init(AID aid) {
-		this.aid = aid;
-	}
+	
 	
 	@Override
 	public AID getAID() {
 		return aid;
 	}
+	
+	@Override
+	public void init(AID aid) {
+		this.aid = aid;
+	}
+	
+	
 }
