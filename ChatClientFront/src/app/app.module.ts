@@ -6,28 +6,28 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ConsoleComponent } from './components/console/console.component';
-import { StartAgentComponent } from './components/start-agent/start-agent.component';
-import { AgentTypesComponent } from './components/agent-types/agent-types.component';
-import { RunningAgentsComponent } from './components/running-agents/running-agents.component';
-import { SendMessageComponent } from './components/send-message/send-message.component';
+import { ConsoleComponent } from './components/console-component/console.component';
+import { StartComponent } from './components/start-component/start.component';
+import { TypesComponent } from './components/types-component/types.component';
+import { RunningComponent } from './components/running-agents/running.component';
+import { MessageComponent } from './components/message-component/message.component';
 
 import {MatListModule} from '@angular/material/list'; 
 import {MatSelectModule} from '@angular/material/select'; 
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button'
 import { FormsModule } from '@angular/forms';
-import { HomeComponent } from './components/home/home.component';
+import { AgentsComponent } from './components/agents-component/agents.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConsoleComponent,
-    StartAgentComponent,
-    AgentTypesComponent,
-    RunningAgentsComponent,
-    SendMessageComponent,
-    HomeComponent
+    StartComponent,
+    TypesComponent,
+    RunningComponent,
+    MessageComponent,
+    AgentsComponent
     
   ],
   imports: [

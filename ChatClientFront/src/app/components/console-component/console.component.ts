@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoggerSocketService } from 'src/app/services/logger-socket.service';
+import { ConsoleSocketService } from 'src/app/services/socket/console-socket.service';
 
 @Component({
   selector: 'app-console',
@@ -10,7 +10,7 @@ export class ConsoleComponent implements OnInit {
 
   liveData$ = this.loggerSocket.messages$;
 
-  constructor(private loggerSocket : LoggerSocketService) {
+  constructor(private loggerSocket : ConsoleSocketService) {
     this.liveData$.subscribe({
       next : msg => this.handleMessage(msg as string)
     });
@@ -22,11 +22,13 @@ export class ConsoleComponent implements OnInit {
     this.loggerSocket.connect()
   }
 
-  handleMessage(msg : string) {
-    this.logs.push(msg)
+  
+
+  clearConsole() {
+    this.logs = []
   }
 
-  clear() {
-    this.logs = []
+  handleMessage(msg : string) {
+    this.logs.push(msg)
   }
 }

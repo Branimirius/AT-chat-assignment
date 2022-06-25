@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { AgentType } from './model/agent-type';
 import { AID } from './model/aid';
-import { AgentService } from './services/agent.service';
-import { MessageService } from './services/message.service';
+import { AgentService } from './services/agents/agent.service';
+import { MessageService } from './services/agents/message.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ import { MessageService } from './services/message.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'match-score-prediction-client';
+  title = 'ChatClientFront';
 
   showStartAgent = false;
   showSendMessage = false;

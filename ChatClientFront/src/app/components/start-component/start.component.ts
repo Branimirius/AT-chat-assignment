@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AgentType } from 'src/app/model/agent-type';
-import { AgentService } from 'src/app/services/agent.service';
-import { TypeSocketService } from 'src/app/services/type-socket.service';
+import { AgentService } from 'src/app/services/agents/agent.service';
+import { TypeSocketService } from 'src/app/services/socket/type-socket.service';
 
 @Component({
   selector: 'app-start-agent',
-  templateUrl: './start-agent.component.html',
-  styleUrls: ['./start-agent.component.css']
+  templateUrl: './start.component.html',
+  styleUrls: ['./start.component.css']
 })
-export class StartAgentComponent implements OnInit {
+export class StartComponent implements OnInit {
 
   liveData$ = this.typeSocket.messages$;
   

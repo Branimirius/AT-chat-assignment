@@ -6,9 +6,11 @@ import { EMPTY, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class LoggerSocketService {
+export class TypeSocketService {
 
-  private WS_ENDPOINT : string = 'ws://localhost:8180/chat-war/ws/logger';
+  constructor() { }
+
+  private WS_ENDPOINT : string = 'ws://localhost:8180/chat-war/ws/type';
 
   private socket$: WebSocketSubject<any>;
   private messagesSubject$ = new Subject();
@@ -16,27 +18,30 @@ export class LoggerSocketService {
   
   public connect(): void {
     if (!this.socket$ || this.socket$.closed) {
-      this.socket$ = this.getNewWebSocket();
+      this.socket$ = this.getWS();
       const messages = this.socket$.pipe(
         tap({
           error: error => console.log(error),
         }), catchError(_ => EMPTY));
+        
       this.messagesSubject$.next(messages);
       this.socket$.subscribe({
-        complete: () => { console.log('connection with logger socket closed') }
+        complete: () => { console.log('connection with agent socket closed') }
       })
     }
   }
   
-  private getNewWebSocket() {
+  private getWS() {
     return webSocket({url: this.WS_ENDPOINT, deserializer: msg => msg.data});
+  }
+
+  
+
+  close() {
+    this.socket$.complete();
   }
 
   sendMessage(msg: any) {
     this.socket$.next(msg);
-  }
-
-  close() {
-    this.socket$.complete();
   }
 }

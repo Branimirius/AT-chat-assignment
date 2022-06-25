@@ -6,23 +6,27 @@ import { EMPTY, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class TypeSocketService {
+export class HomeSocketService {
 
-  constructor() { }
-
-  private WS_ENDPOINT : string = 'ws://localhost:8180/chat-war/ws/type';
+  private WS_ENDPOINT : string = 'ws://localhost:8180/chat-war/ws/agent';
 
   private socket$: WebSocketSubject<any>;
   private messagesSubject$ = new Subject();
   public messages$ = this.messagesSubject$.pipe(switchAll(), share(), catchError(e => { throw e }));
   
+  private getWS() {
+    return webSocket({url: this.WS_ENDPOINT, deserializer: msg => msg.data});
+  }
+
+
   public connect(): void {
     if (!this.socket$ || this.socket$.closed) {
-      this.socket$ = this.getNewWebSocket();
+      this.socket$ = this.getWS();
       const messages = this.socket$.pipe(
         tap({
           error: error => console.log(error),
         }), catchError(_ => EMPTY));
+
       this.messagesSubject$.next(messages);
       this.socket$.subscribe({
         complete: () => { console.log('connection with agent socket closed') }
@@ -30,15 +34,15 @@ export class TypeSocketService {
     }
   }
   
-  private getNewWebSocket() {
-    return webSocket({url: this.WS_ENDPOINT, deserializer: msg => msg.data});
+  
+
+  
+
+  close() {
+    this.socket$.complete();
   }
 
   sendMessage(msg: any) {
     this.socket$.next(msg);
-  }
-
-  close() {
-    this.socket$.complete();
   }
 }
