@@ -12,7 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 public interface ConnectionManager {
-
+	/*
 	@POST
 	@Path("/register")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -32,4 +32,5 @@ public interface ConnectionManager {
 	@Path("/node")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String pingNode();
+	*/
 }

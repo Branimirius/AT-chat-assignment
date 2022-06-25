@@ -39,10 +39,10 @@ public class ConnectionManagerBean implements ConnectionManager {
 	private void init() {
 		setLocalNodeInfo();
 		hostAlias = acm.getHost().getAlias();
-		if(!isMaster())
-			handshake();
+		//if(!isMaster())
+			//handshake();
 	}
-	
+	/*
 	@Override
 	public List<String> registerNode(String nodeAlias) {
 		System.out.println("Registering a node with alias: " + nodeAlias);
@@ -55,7 +55,8 @@ public class ConnectionManagerBean implements ConnectionManager {
 		}).start();
 		return getNodes(nodeAlias);
 	}
-
+*/
+	/*
 	@Override
 	public void addNode(String nodeAlias) {
 		System.out.println("Adding node with alias: " + nodeAlias);
@@ -69,18 +70,19 @@ public class ConnectionManagerBean implements ConnectionManager {
 		agm.deleteRunningAgents(alias);
 		agm.deleteAgentTypes(alias);
 	}
-
+*/
+	/*
 	@Override
 	public String pingNode() {
 		System.out.println("Pinged");
 		return "ok";
 	}
-	
+	*/
 	private void setLocalNodeInfo() {
 		acm.setLocalNodeInfo();
 		acm.setMasterAlias();
 	}
-	
+/*	
 	private void handshake() {
 		System.out.println("Initiating a handshake, master: " + acm.getMasterAlias());
 		ResteasyClient client = new ResteasyClientBuilder().build();
@@ -90,29 +92,32 @@ public class ConnectionManagerBean implements ConnectionManager {
 		client.close();
 		System.out.println("Handshake successful. Connected nodes: " + acm.getConnectedNodes());
 	}
+	*/
 	
-	@Schedule(hour = "*", minute="*", second="*/120", persistent=false)
-	private void heartbeat() {
-		System.out.println("Heartbeat protocol initiated");
-		for(String node : acm.getConnectedNodes()) {
-			System.out.println("Pinging node with alias: " + node);
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					boolean pingSuccessful = pingNode(node);
-					if(!pingSuccessful) {
-						System.out.println("Node with alias: " + node + " not alive.");
-						deleteNode(node);
-						instructNodesToDeleteNode(node);
-						try {
-							instructNodeToDeleteNode(acm.getHost().getAlias(), node);
-						} catch (Exception e) { }
-					}
-				}
-			}).start();;
-		}
-	}
 
+	//@Schedule(hour = "*", minute="*", second="*/120", persistent=false)
+	//private void heartbeat() {
+	//	System.out.println("Heartbeat protocol initiated");
+	//	for(String node : acm.getConnectedNodes()) {
+	//		System.out.println("Pinging node with alias: " + node);
+	//		new Thread(new Runnable() {
+	//			@Override
+	//			public void run() {
+	//				boolean pingSuccessful = pingNode(node);
+	//				if(!pingSuccessful) {
+	//					System.out.println("Node with alias: " + node + " not alive.");
+	//					deleteNode(node);
+	//					instructNodesToDeleteNode(node);
+	//					try {
+	//						instructNodeToDeleteNode(acm.getHost().getAlias(), node);
+	//					} catch (Exception e) { }
+	//				}
+	//			}
+	//		}).start();;
+	//	}
+	//}
+
+/*
 	private boolean pingNode(String node) {
 		int triesLeft = 2;
 		boolean pingSuccessful = false;
@@ -135,12 +140,13 @@ public class ConnectionManagerBean implements ConnectionManager {
 		}
 		return pingSuccessful;
 	}
-	
-	@PreDestroy
-	private void shutDown() {
-		instructNodesToDeleteNode(hostAlias);
-	}
-	
+*/
+
+//	@PreDestroy
+//	private void shutDown() {
+//		instructNodesToDeleteNode(hostAlias);
+//	}
+/*	
 	private void instructNodeToDeleteNode(String nodeAlias, String receiver) {
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		ResteasyWebTarget rtarget = client.target("http://" + receiver + "/chat-war/rest/connection");
@@ -148,7 +154,8 @@ public class ConnectionManagerBean implements ConnectionManager {
 		rest.deleteNode(nodeAlias);
 		client.close();
 	}
-	
+*/
+/*
 	private void instructNodesToDeleteNode(String nodeAlias) {
 		for(String node : acm.getConnectedNodes()) {
 			ResteasyClient client = new ResteasyClientBuilder().build();
@@ -168,7 +175,8 @@ public class ConnectionManagerBean implements ConnectionManager {
 			client.close();
 		}
 	}
-	
+*/
+/*
 	private void syncData(String nodeAlias) {
 		try {
 			syncAgentTypes(nodeAlias);
@@ -188,7 +196,7 @@ public class ConnectionManagerBean implements ConnectionManager {
 			}
 		}
 	}
-	
+*/
 	private void syncAgentTypes(String nodeAlias) {
 		Set<AgentType> newTypes = getAgentTypes(nodeAlias);
 		postAgentTypes(agm.getAgentTypes(), nodeAlias);
@@ -250,7 +258,10 @@ public class ConnectionManagerBean implements ConnectionManager {
 		rest.updateRunningAgents(agents, nodeAlias);
 		client.close();
 	}
-	
+	private boolean isMaster() {
+		return acm.getMasterAlias() == null || acm.getMasterAlias().length() == 0;
+	}
+/*	
 	private List<String> getNodes(String nodeAlias) {
 		try {
 			List<String> returnNodes = new ArrayList<String>(acm.getConnectedNodes());
@@ -276,8 +287,6 @@ public class ConnectionManagerBean implements ConnectionManager {
 			}
 		}
 	}
+*/	
 	
-	private boolean isMaster() {
-		return acm.getMasterAlias() == null || acm.getMasterAlias().length() == 0;
-	}
 }

@@ -9,7 +9,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateful;
 
 import agentmanager.AgentManager;
-import chatmanager.ChatManagerRemote;
+import chatmanager.ChatManager;
 import connectionmanager.AgentCenter;
 import messagemanager.ACLMessage;
 import messagemanager.MessageManagerRemote;
@@ -25,7 +25,7 @@ public class UserAgent extends BaseAgent {
 
 	private static final long serialVersionUID = 1L;
 	
-	@EJB ChatManagerRemote chm;
+	@EJB ChatManager chm;
 	@EJB AgentManager agm;
 	@EJB AgentCenterRemote acm;
 	@EJB MessageManagerRemote msm;
@@ -93,7 +93,7 @@ public class UserAgent extends BaseAgent {
 	
 	
 	private void registerUser(String username, String password) {
-		boolean success = chm.register(username, password);
+		boolean success = chm.registerUser(username, password);
 		if(success) {
 			logger.send("User with username " + username + " successfully registered");
 			informHelperAgents(Performative.ADD_REGISTERED, new User(username, password));
@@ -104,7 +104,7 @@ public class UserAgent extends BaseAgent {
 	
 	private void logOut(String username) {
 		if(loggedIn(username)) {
-			chm.logOut(username);
+			chm.logOutUser(username);
 			logger.send("User with username " + username + " successfully logged out");
 			informHelperAgents(Performative.REMOVE_LOGGED_IN, new User(username, ""));
 		}
@@ -112,7 +112,7 @@ public class UserAgent extends BaseAgent {
 	
 	
 	private void logIn(String username, String password) {
-		boolean success = chm.logIn(username, password);
+		boolean success = chm.logInUser(username, password);
 		if(success) {
 			logger.send("User with username " + username + " successfully logged in");
 			informHelperAgents(Performative.ADD_LOGGED_IN, new User(username, password));
@@ -122,7 +122,7 @@ public class UserAgent extends BaseAgent {
 	}
 	private void getLoggedIn(String username) {
 		if(loggedIn(username)) {
-			List<User> users = chm.getLoggedIn();
+			List<User> users = chm.getLoggedInUsers();
 			logger.send("Logged in users: " + users);
 		}
 	}
@@ -131,7 +131,7 @@ public class UserAgent extends BaseAgent {
 	
 	private void sendMessage(String sender, String receiver, String subject, String content) {
 		if(loggedIn(sender)) {
-			if(!chm.existsRegistered(receiver)) {
+			if(!chm.existsUserRegistered(receiver)) {
 				logger.send("Reciever with username " + receiver + " doesn't exist");
 				return;
 			}
@@ -144,21 +144,21 @@ public class UserAgent extends BaseAgent {
 	
 	private void getRegistered(String username) {
 		if(loggedIn(username)) {
-			List<User> users = chm.getRegistered();
+			List<User> users = chm.getRegisteredUser();
 			logger.send("Registered users: " + users);
 		}
 	}
 	
 	private void sendMessageToAll(String sender, String subject, String content) {
 		if(loggedIn(sender))
-			for(User user : chm.getLoggedIn())
+			for(User user : chm.getLoggedInUsers())
 				sendMessage(sender, user.getUsername(), subject, content);
 	}
 	
 	
 	
 	private boolean loggedIn(String username) {
-		if(!chm.existsLoggedIn(username)) {
+		if(!chm.existsUserLogged(username)) {
 			logger.send("User with username " + username + " is not logged in");
 			return false;
 		}

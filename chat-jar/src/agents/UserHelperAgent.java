@@ -10,7 +10,7 @@ import javax.ejb.Stateful;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import chatmanager.ChatManagerRemote;
+import chatmanager.ChatManager;
 import messagemanager.ACLMessage;
 import messagemanager.MessageManagerRemote;
 import messagemanager.Performative;
@@ -23,7 +23,7 @@ public class UserHelperAgent extends BaseAgent {
 
 	private static final long serialVersionUID = 1L;
 	
-	@EJB ChatManagerRemote chm;
+	@EJB ChatManager chm;
 	@EJB MessageManagerRemote msm;
 
 	@Override
