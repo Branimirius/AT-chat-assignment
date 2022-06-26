@@ -5,7 +5,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateful;
 
 import messagemanager.ACLMessage;
-import messagemanager.MessageManagerRemote;
+import messagemanager.MessageManager;
 
 @Stateful
 @Remote(Agent.class)
@@ -13,7 +13,7 @@ public class CollectorAgent extends BaseAgent {
 
 	private static final long serialVersionUID = 1L;
 
-	@EJB MessageManagerRemote msm;
+	@EJB MessageManager msm;
 	
 	@Override
 	public void handleMessage(ACLMessage message) {

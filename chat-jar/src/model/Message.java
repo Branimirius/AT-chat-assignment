@@ -8,8 +8,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import util.JsonDateDeserializer;
-import util.JsonDateSerializer;
+import util.DateDeserializer;
+import util.DateSerializer;
 
 public class Message implements Serializable {
 
@@ -17,8 +17,8 @@ public class Message implements Serializable {
 	
 	private User sender;
 	private User receiver;
-	@JsonDeserialize(using = JsonDateDeserializer.class)
-	@JsonSerialize(using = JsonDateSerializer.class)
+	@JsonDeserialize(using = DateDeserializer.class)
+	@JsonSerialize(using = DateSerializer.class)
 	private LocalDateTime created;
 	private String subject;
 	private String content;

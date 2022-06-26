@@ -122,13 +122,7 @@ public class ACLMessage implements Serializable {
 		return language;
 	}
 
-	public void setLanguage(String language) {
-		this.language = language;
-	}
-
-	public String getEncoding() {
-		return encoding;
-	}
+	
 
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
@@ -145,7 +139,14 @@ public class ACLMessage implements Serializable {
 	public String getProtocol() {
 		return protocol;
 	}
+	
+	public void setLanguage(String language) {
+		this.language = language;
+	}
 
+	public String getEncoding() {
+		return encoding;
+	}
 	public void setProtocol(String protocol) {
 		this.protocol = protocol;
 	}

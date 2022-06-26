@@ -5,7 +5,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateful;
 
 import messagemanager.ACLMessage;
-import messagemanager.MessageManagerRemote;
+import messagemanager.MessageManager;
 import util.AgentCenterRemote;
 
 @Stateful
@@ -16,7 +16,7 @@ public class PredictorAgent extends BaseAgent {
 	
 	
 	@EJB AgentCenterRemote acm;
-	@EJB MessageManagerRemote msm;
+	@EJB MessageManager msm;
 
 	@Override
 	public void handleMessage(ACLMessage message) {

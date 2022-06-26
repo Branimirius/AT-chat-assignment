@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.node.TextNode;
 
-public class JsonDateDeserializer extends JsonDeserializer <LocalDateTime> {
+public class DateDeserializer extends JsonDeserializer <LocalDateTime> {
 
 	  @Override
 	  public LocalDateTime deserialize(JsonParser jp, DeserializationContext ctxt)

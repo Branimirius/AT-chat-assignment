@@ -8,14 +8,14 @@ import javax.ejb.Stateless;
 import javax.ws.rs.Path;
 
 import messagemanager.ACLMessage;
-import messagemanager.MessageManagerRemote;
+import messagemanager.MessageManager;
 
 @Stateless
 @Path("/messages")
 @Remote(MessageEndpoint.class)
 public class MessageEndpointBean implements MessageEndpoint {
 
-	@EJB private MessageManagerRemote msm;
+	@EJB private MessageManager msm;
 	
 	@Override
 	public void sendMessage(ACLMessage message) {

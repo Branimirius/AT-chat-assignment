@@ -6,7 +6,7 @@ import javax.ejb.Stateful;
 
 import chatmanager.ChatManager;
 import messagemanager.ACLMessage;
-import messagemanager.MessageManagerRemote;
+import messagemanager.MessageManager;
 
 
 @Stateful
@@ -16,7 +16,7 @@ public class UserHelperAgent extends BaseAgent {
 	private static final long serialVersionUID = 1L;
 	
 	@EJB ChatManager chm;
-	@EJB MessageManagerRemote msm;
+	@EJB MessageManager msm;
 
 	@Override
 	public void handleMessage(ACLMessage message) {

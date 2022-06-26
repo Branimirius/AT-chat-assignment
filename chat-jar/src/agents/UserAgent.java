@@ -12,7 +12,7 @@ import agentmanager.AgentManager;
 import chatmanager.ChatManager;
 import connectionmanager.AgentCenter;
 import messagemanager.ACLMessage;
-import messagemanager.MessageManagerRemote;
+import messagemanager.MessageManager;
 import messagemanager.Performative;
 import model.Message;
 import model.User;
@@ -28,7 +28,7 @@ public class UserAgent extends BaseAgent {
 	@EJB ChatManager chm;
 	@EJB AgentManager agm;
 	@EJB AgentCenterRemote acm;
-	@EJB MessageManagerRemote msm;
+	@EJB MessageManager msm;
 	@EJB Logger logger;
 	
 	@Override

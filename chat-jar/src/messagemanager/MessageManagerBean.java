@@ -16,7 +16,7 @@ import javax.jms.Session;
 
 @Stateless
 @LocalBean
-public class MessageManagerBean implements MessageManagerRemote {
+public class MessageManagerBean implements MessageManager {
 
 	@EJB private JMSFactory factory;
 	private Session session;
