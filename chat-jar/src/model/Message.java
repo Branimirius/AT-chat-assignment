@@ -15,13 +15,13 @@ public class Message implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private User sender;
-	private User receiver;
+	private User msgSender;
+	private User msgReceiver;
 	@JsonDeserialize(using = DateDeserializer.class)
 	@JsonSerialize(using = DateSerializer.class)
-	private LocalDateTime created;
-	private String subject;
-	private String content;
+	private LocalDateTime msgCreated;
+	private String msgSubject;
+	private String msgContent;
 	
 	public Message() {
 		
@@ -29,41 +29,41 @@ public class Message implements Serializable {
 	
 	public Message(User sender, User receiver, LocalDateTime created, String subject, String content) {
 		super();
-		this.sender = sender;
-		this.receiver = receiver;
-		this.created = created;
-		this.subject = subject;
-		this.content = content;
+		this.msgSender = sender;
+		this.msgReceiver = receiver;
+		this.msgCreated = created;
+		this.msgSubject = subject;
+		this.msgContent = content;
 	}
 
 	public User getSender() {
-		return sender;
+		return msgSender;
 	}
 
 	public User getReceiver() {
-		return receiver;
+		return msgReceiver;
 	}
 
 	public LocalDateTime getCreated() {
-		return created;
+		return msgCreated;
 	}
 
 	public String getSubject() {
-		return subject;
+		return msgSubject;
 	}
 
 	public String getContent() {
-		return content;
+		return msgContent;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		Message message = (Message)obj;
-		return sender.equals(message.sender) &&
-				receiver.equals(message.receiver) &&
-				created.equals(message.created) &&
-				subject.equals(message.subject) &&
-				content.equals(message.content);
+		return msgSender.equals(message.msgSender) &&
+				msgReceiver.equals(message.msgReceiver) &&
+				msgCreated.equals(message.msgCreated) &&
+				msgSubject.equals(message.msgSubject) &&
+				msgContent.equals(message.msgContent);
 	}
 	
 	@Override

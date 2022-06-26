@@ -48,21 +48,21 @@ public class AgentManagerBean implements AgentManager {
 	public void stopAgent(AID aid) {
 		boolean deleted = runningAgents.removeIf(a -> a.getAID().equals(aid));
 		if(deleted) {
-			updateViaSocket();
+			updateWithSocket();
 		}
 		
 	}
 
 	@Override
 	public void startAgent(AgentType type, String name) {
-		if(getAvailableAgentTypes().stream().anyMatch(t -> t.equals(type))) {
+		if(getAvailableTypes().stream().anyMatch(t -> t.equals(type))) {
 			Agent agent = (Agent) JNDILookup.lookUp(type.getModule() + type.getName() + "!"
 									+ Agent.class.getName() + "?stateful", Agent.class);
 			if(agent != null) {
 				agent.init(new AID(name, acm.getHost(), type));
 				if(runningAgents.stream().noneMatch(a -> a.getAID().equals(agent.getAID()))) {
 					runningAgents.add(agent);
-					updateViaSocket();
+					updateWithSocket();
 				}
 			}
 		}
@@ -78,34 +78,34 @@ public class AgentManagerBean implements AgentManager {
 	@Override
 	public Set<AgentType> getAgentTypes() {
 		Set<AgentType> types = new HashSet<AgentType>(otherNodeTypes);
-		types.addAll(getAvailableAgentTypes());
+		types.addAll(getAvailableTypes());
 		return types;
 	}
 		
 	@Override
 	public void updateAgentTypes(Set<AgentType> types, String nodeAlias) {
 		otherNodeTypes.removeIf(t -> t.getNode().equals(nodeAlias));
-		//otherNodeTypes.addAll(types);
-		updateViaTypeSocket();
+		
+		updateWithTypeSocket();
 	}
 
 	@Override
 	public void updateRunningAgents(Set<AID> agents, String nodeAlias) {
 		otherNodeAgents.removeIf(a -> a.getNode().getAlias().equals(nodeAlias));
 		otherNodeAgents.addAll(agents);
-		updateViaSocket();
+		updateWithSocket();
 	}
 	
 	@Override
 	public void deleteRunningAgents(String nodeAlias) {
 		otherNodeAgents.removeIf(a -> a.getNode().getAlias().equals(nodeAlias));
-		updateViaSocket();
+		updateWithSocket();
 	}
 	
 	@Override
 	public void deleteAgentTypes(String nodeAlias) {
 		otherNodeTypes.removeIf(t -> t.getNode().equals(nodeAlias));
-		updateViaTypeSocket();
+		updateWithTypeSocket();
 	}
 	
 	@Override
@@ -113,7 +113,7 @@ public class AgentManagerBean implements AgentManager {
 		return runningAgents.stream().filter(a -> a.getAID().equals(aid)).findFirst().orElse(null);
 	}	
 		
-	private Set<AgentType> getAvailableAgentTypes() {
+	private Set<AgentType> getAvailableTypes() {
 		Set<AgentType> types = new HashSet<AgentType>();
 		types.add(new AgentType(UserAgent.class.getSimpleName(), JNDILookup.JNDIPathChat, acm.getHost().getAlias()));
 		types.add(new AgentType(UserHelperAgent.class.getSimpleName(), JNDILookup.JNDIPathChat, acm.getHost().getAlias()));
@@ -122,7 +122,7 @@ public class AgentManagerBean implements AgentManager {
 		types.add(new AgentType(PredictorAgent.class.getSimpleName(), JNDILookup.JNDIPathChat, acm.getHost().getAlias()));
 		return types;
 	}
-	private void updateViaTypeSocket() {
+	private void updateWithTypeSocket() {
 		try {
 	    	Set<AgentType> types = getAgentTypes();
 			ObjectMapper mapper = new ObjectMapper();
@@ -133,7 +133,7 @@ public class AgentManagerBean implements AgentManager {
 		}
 	}
 	
-	private void updateViaSocket() {
+	private void updateWithSocket() {
 	    try {
 	    	Set<AID> agents = getRunningAgents();
 			ObjectMapper mapper = new ObjectMapper();
@@ -143,6 +143,8 @@ public class AgentManagerBean implements AgentManager {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 	
 }
